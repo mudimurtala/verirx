@@ -95,14 +95,14 @@ function RegisterPage() {
         ) : (
           <form
             onSubmit={onSubmit}
-            className="mt-10 rounded-3xl border border-border bg-surface/60 p-8"
+            className="mt-8 rounded-2xl border border-border bg-surface/60 p-5 sm:mt-10 sm:rounded-3xl sm:p-8"
           >
             {!connected && (
               <p className="mb-6 rounded-xl border border-border bg-surface-2/60 px-4 py-3 text-sm text-muted-foreground">
                 Connect a wallet to enable batch registration.
               </p>
             )}
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
               <label className="block sm:col-span-2">
                 <span className="text-sm font-medium">Drug name</span>
                 <input

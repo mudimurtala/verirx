@@ -41,7 +41,7 @@ function VerifyPage() {
     <div className="min-h-screen">
       <SiteHeader />
       <main className="relative overflow-hidden px-6 py-16">
-        <FloatingShapes className="opacity-60" />
+        <FloatingShapes />
         <div className="relative z-10 mx-auto max-w-3xl">
         <h1 className="text-4xl font-bold">Verify a product</h1>
         <p className="mt-2 text-sm text-muted-foreground">

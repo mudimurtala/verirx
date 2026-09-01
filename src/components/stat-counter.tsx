@@ -45,9 +45,9 @@ export function StatCounter({ value, label, suffix = "", prefix = "", decimals =
   return (
     <div
       ref={ref}
-      className="rounded-3xl border border-border bg-surface/60 p-8 transition-colors duration-300 hover:border-accent/40"
+      className="rounded-2xl border border-border bg-surface/60 p-4 transition-colors duration-300 hover:border-accent/40 md:rounded-3xl md:p-8"
     >
-      <p className="font-display text-5xl font-bold tracking-tight text-accent">
+      <p className="font-display text-3xl font-bold tracking-tight text-accent md:text-5xl">
         {prefix}
         {display.toFixed(decimals)}
         {suffix}

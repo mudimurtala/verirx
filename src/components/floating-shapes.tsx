@@ -76,7 +76,7 @@ export function FloatingShapes({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden text-accent select-none ${className}`}
+      className={`pointer-events-none absolute inset-0 z-0 hidden overflow-hidden text-accent opacity-10 select-none sm:block ${className}`}
     >
       {SHAPES.map((s, i) => (
         <span

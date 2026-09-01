@@ -53,7 +53,7 @@ function Landing() {
         <section className="relative overflow-hidden">
           <div className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent/15 blur-[140px]" />
           <FloatingShapes />
-          <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-20 text-center md:pt-32 md:pb-28">
+          <div className="relative z-10 mx-auto max-w-5xl px-6 pt-24 pb-20 text-center md:pt-32 md:pb-28">
 
             <span className="inline-flex animate-[rise_0.7s_cubic-bezier(0.22,1,0.36,1)_both] items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs tracking-wide text-muted-foreground uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -100,7 +100,7 @@ function Landing() {
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {STEPS.map((step, i) => (
               <Reveal key={step.n} delay={i * 120}>
-                <div className="h-full rounded-3xl border border-border bg-surface/60 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40">
+                <div className="h-full rounded-2xl border border-border bg-surface/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 md:rounded-3xl md:p-8">
                   <span className="font-display text-sm font-bold text-accent">{step.n}</span>
                   <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -118,7 +118,7 @@ function Landing() {
             <Reveal>
               <h2 className="text-3xl font-bold md:text-4xl">Numbers that matter</h2>
             </Reveal>
-            <div className="mt-10 grid gap-6 md:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
               <StatCounter value={0} label="Counterfeit batches missed" />
               <StatCounter value={100} suffix="%" label="Records held on-chain" />
               <StatCounter value={1.4} decimals={1} suffix="s" label="Average verification time" />
@@ -129,7 +129,7 @@ function Landing() {
 
         {/* CTA */}
         <section className="relative overflow-hidden px-6 py-24 text-center">
-          <FloatingShapes className="opacity-70" />
+          <FloatingShapes />
           <div className="relative z-10 mx-auto max-w-4xl">
             <Reveal>
               <h2 className="text-4xl font-bold md:text-5xl">Put proof on every pack.</h2>
