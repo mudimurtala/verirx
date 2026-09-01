@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MOCK_WALLET_ADDRESS } from "@/lib/mock-batches";
+import { btnGhost, btnOutline, btnSizes, btnSolid } from "@/lib/button-styles";
 
 const TITLE = "Register a drug batch — VeriRx";
 const DESCRIPTION =
@@ -67,7 +68,7 @@ function RegisterPage() {
           {connected ? (
             <button
               onClick={() => setConnected(false)}
-              className="flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/15"
+              className={`${btnOutline} ${btnSizes.sm}`}
             >
               <span className="h-2 w-2 rounded-full bg-accent" />
               {MOCK_WALLET_ADDRESS}
@@ -75,7 +76,7 @@ function RegisterPage() {
           ) : (
             <button
               onClick={() => setConnected(true)}
-              className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-transform duration-200 hover:scale-[1.03]"
+              className={`${btnSolid} ${btnSizes.sm}`}
             >
               Connect Wallet
             </button>
@@ -147,7 +148,7 @@ function RegisterPage() {
             <button
               type="submit"
               disabled={!connected || status === "submitting"}
-              className="mt-8 flex w-full items-center justify-center gap-3 rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-all duration-200 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
+              className={`mt-8 w-full ${btnSolid} ${btnSizes.lg}`}
             >
               {status === "submitting" && (
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground" />
@@ -196,7 +197,7 @@ function SuccessCard({
       </p>
       <button
         onClick={onReset}
-        className="mt-8 rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:border-accent/50"
+        className={`mt-8 ${btnGhost} ${btnSizes.md}`}
       >
         Register another batch
       </button>
