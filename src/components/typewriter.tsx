@@ -15,9 +15,9 @@ interface TypewriterProps {
  */
 export function Typewriter({
   words,
-  typingSpeed = 75,
-  deletingSpeed = 40,
-  holdTime = 1600,
+  typingSpeed = 130,
+  deletingSpeed = 70,
+  holdTime = 2200,
   className,
 }: TypewriterProps) {
   const [index, setIndex] = useState(0); // which word
@@ -60,7 +60,7 @@ export function Typewriter({
 
   const current = words[index % words.length] ?? words[0] ?? "";
   return (
-    <span className={className} aria-label={current}>
+    <span className={`${className ?? ""} whitespace-nowrap inline-block`} aria-label={current}>
       {current.slice(0, sub)}
       <span className="typewriter-caret" aria-hidden="true" />
     </span>

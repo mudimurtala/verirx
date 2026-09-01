@@ -59,7 +59,7 @@ function Landing() {
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               Built on Solana
             </span>
-            <h1 className="text-gradient-accent mt-8 animate-[rise_0.8s_cubic-bezier(0.22,1,0.36,1)_0.08s_both] text-5xl leading-[1.02] font-bold md:text-7xl">
+            <h1 className="text-gradient-accent mt-8 animate-[rise_0.8s_cubic-bezier(0.22,1,0.36,1)_0.08s_both] text-4xl leading-[1.05] font-bold md:text-6xl">
               1 in 10 medicines is{" "}
               <Typewriter
                 words={["fake.", "counterfeit.", "substandard.", "dangerous.", "unverified."]}
