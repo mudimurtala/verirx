@@ -5,6 +5,7 @@ import { MarqueeStrip } from "@/components/marquee-strip";
 import { StatCounter } from "@/components/stat-counter";
 import { Reveal } from "@/components/reveal";
 import { FloatingShapes } from "@/components/floating-shapes";
+import { Typewriter } from "@/components/typewriter";
 import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
 
@@ -59,7 +60,10 @@ function Landing() {
               Built on Solana
             </span>
             <h1 className="text-gradient-accent mt-8 animate-[rise_0.8s_cubic-bezier(0.22,1,0.36,1)_0.08s_both] text-5xl leading-[1.02] font-bold md:text-7xl">
-              1 in 10 medicines is fake. Yours shouldn&apos;t be.
+              1 in 10 medicines is{" "}
+              <Typewriter
+                words={["fake.", "counterfeit.", "substandard.", "dangerous.", "unverified."]}
+              />
             </h1>
             <p className="mx-auto mt-6 max-w-2xl animate-[rise_0.8s_cubic-bezier(0.22,1,0.36,1)_0.16s_both] text-lg text-muted-foreground">
               VeriRx anchors every drug batch to an immutable on-chain record. Manufacturers
