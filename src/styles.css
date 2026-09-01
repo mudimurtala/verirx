@@ -129,6 +129,22 @@
   box-shadow: 0 24px 70px -30px color-mix(in oklab, var(--accent) 70%, transparent);
 }
 
+/* Reference-site button: on hover the containing rectangle "splits" —
+   its top-right corner is clipped off at an angle and the border lightens. */
+@utility btn-notch {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 100% 100%, 0 100%);
+  transition:
+    clip-path 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
+
+  &:hover:not(:disabled) {
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  }
+}
+
+
 @utility text-gradient-accent {
   background: linear-gradient(
     100deg,
