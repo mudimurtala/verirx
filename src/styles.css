@@ -93,6 +93,38 @@
   }
 }
 
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    transform: translate3d(18px, -26px, 0);
+  }
+  66% {
+    transform: translate3d(-14px, 16px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="drift"],
+  [style*="spin-slow"] {
+    animation: none !important;
+  }
+}
+
+
 @utility glow-accent {
   box-shadow: 0 24px 70px -30px color-mix(in oklab, var(--accent) 70%, transparent);
 }
