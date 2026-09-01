@@ -123,8 +123,11 @@ function Landing() {
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-4xl px-6 py-24 text-center">
+        <section className="relative overflow-hidden px-6 py-24 text-center">
+          <FloatingShapes className="opacity-70" />
+          <div className="relative z-10 mx-auto max-w-4xl">
           <Reveal>
+
             <h2 className="text-4xl font-bold md:text-5xl">
               Put proof on every pack.
             </h2>
