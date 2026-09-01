@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { MarqueeStrip } from "@/components/marquee-strip";
 import { StatCounter } from "@/components/stat-counter";
 import { Reveal } from "@/components/reveal";
+import { FloatingShapes } from "@/components/floating-shapes";
+
 
 const TITLE = "VeriRx — Verify drug batch authenticity on Solana";
 const DESCRIPTION =
