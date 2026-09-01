@@ -38,7 +38,9 @@ function VerifyPage() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="relative overflow-hidden px-6 py-16">
+        <FloatingShapes className="opacity-60" />
+        <div className="relative z-10 mx-auto max-w-3xl">
         <h1 className="text-4xl font-bold">Verify a product</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Enter the batch ID printed on the pack, or scan its QR code. No wallet or account
