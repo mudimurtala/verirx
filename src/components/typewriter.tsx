@@ -31,7 +31,7 @@ export function Typewriter({
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduced.current) return;
 
-    const word = words[index % words.length];
+    const word = words[index % words.length] ?? "";
 
     let timeout: number;
 
@@ -58,9 +58,10 @@ export function Typewriter({
     return <span className={className}>{words[0]}</span>;
   }
 
+  const current = words[index % words.length] ?? words[0] ?? "";
   return (
-    <span className={className} aria-label={words[index % words.length]}>
-      {words[index % words.length].slice(0, sub)}
+    <span className={className} aria-label={current}>
+      {current.slice(0, sub)}
       <span className="typewriter-caret" aria-hidden="true" />
     </span>
   );
