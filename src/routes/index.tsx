@@ -5,6 +5,7 @@ import { MarqueeStrip } from "@/components/marquee-strip";
 import { StatCounter } from "@/components/stat-counter";
 import { Reveal } from "@/components/reveal";
 import { FloatingShapes } from "@/components/floating-shapes";
+import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
 
 const TITLE = "VeriRx — Verify drug batch authenticity on Solana";
@@ -68,13 +69,13 @@ function Landing() {
             <div className="mt-10 flex animate-[rise_0.8s_cubic-bezier(0.22,1,0.36,1)_0.24s_both] flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 to="/register"
-                className="glow-accent w-full rounded-full bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition-transform duration-200 hover:scale-[1.03] sm:w-auto"
+                className={`glow-accent w-full sm:w-auto ${btnSolid} ${btnSizes.lg}`}
               >
                 I&apos;m a Manufacturer
               </Link>
               <Link
                 to="/verify"
-                className="w-full rounded-full border border-border bg-surface/60 px-8 py-4 text-base font-semibold transition-colors duration-200 hover:border-accent/50 hover:bg-surface-2 sm:w-auto"
+                className={`w-full sm:w-auto ${btnGhost} ${btnSizes.lg}`}
               >
                 Verify a Product
               </Link>
@@ -134,13 +135,13 @@ function Landing() {
               <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link
                   to="/register"
-                  className="glow-accent rounded-full bg-accent px-8 py-4 font-semibold text-accent-foreground transition-transform duration-200 hover:scale-[1.03]"
+                  className={`glow-accent ${btnSolid} ${btnSizes.lg}`}
                 >
                   Register a batch
                 </Link>
                 <Link
                   to="/verify"
-                  className="rounded-full border border-border bg-surface/60 px-8 py-4 font-semibold transition-colors hover:border-accent/50"
+                  className={`${btnGhost} ${btnSizes.lg}`}
                 >
                   Verify a batch ID
                 </Link>

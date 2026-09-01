@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MOCK_BATCHES, verifyBatch, type VerifyResult } from "@/lib/mock-batches";
 import { FloatingShapes } from "@/components/floating-shapes";
+import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
 const TITLE = "Verify a drug batch — VeriRx";
 const DESCRIPTION =
@@ -61,14 +62,14 @@ function VerifyPage() {
           <button
             type="button"
             title="QR scanning coming soon"
-            className="rounded-xl border border-border px-5 py-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent/50 hover:text-foreground"
+            className={`${btnGhost} ${btnSizes.lg}`}
           >
             Scan QR
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center justify-center gap-2 rounded-xl bg-accent px-7 py-4 text-sm font-semibold text-accent-foreground transition-transform duration-200 hover:scale-[1.02] disabled:opacity-50"
+            className={`${btnSolid} ${btnSizes.lg}`}
           >
             {loading && (
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground" />

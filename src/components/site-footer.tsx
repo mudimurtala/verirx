@@ -1,11 +1,12 @@
+import { BrandLogo } from "@/components/brand-logo";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/70 bg-surface/40">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="font-display text-xl font-bold">
-            Veri<span className="text-accent">Rx</span>
-          </p>
+          <BrandLogo size="lg" />
+
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             Drug batch authenticity, recorded on Solana. Register once, verify anywhere,
             forever.
