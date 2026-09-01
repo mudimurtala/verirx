@@ -99,6 +99,7 @@ function VerifyPage() {
         )}
 
         {result && !loading && <ResultCard result={result} />}
+        </div>
       </main>
       <SiteFooter />
     </div>
