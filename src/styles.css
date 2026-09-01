@@ -124,6 +124,22 @@
   }
 }
 
+@utility typewriter-caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.95em;
+  margin-left: 0.06em;
+  transform: translateY(0.12em);
+  background: color-mix(in oklab, var(--accent) 80%, white);
+  animation: typewriter-blink 1s steps(2, start) infinite;
+}
+
+@keyframes typewriter-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 
 @utility glow-accent {
   box-shadow: 0 24px 70px -30px color-mix(in oklab, var(--accent) 70%, transparent);
