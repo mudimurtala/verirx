@@ -5,6 +5,7 @@ import { MarqueeStrip } from "@/components/marquee-strip";
 import { StatCounter } from "@/components/stat-counter";
 import { Reveal } from "@/components/reveal";
 import { FloatingShapes } from "@/components/floating-shapes";
+import { Typewriter } from "@/components/typewriter";
 import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
 
