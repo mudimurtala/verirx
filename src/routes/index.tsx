@@ -48,7 +48,9 @@ function Landing() {
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-accent/15 blur-[140px]" />
-          <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-20 text-center md:pt-32 md:pb-28">
+          <FloatingShapes />
+          <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-20 text-center md:pt-32 md:pb-28">
+
             <span className="inline-flex animate-[rise_0.7s_cubic-bezier(0.22,1,0.36,1)_both] items-center gap-2 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-xs tracking-wide text-muted-foreground uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               Built on Solana
