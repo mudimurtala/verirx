@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MOCK_BATCHES, verifyBatch, type VerifyResult } from "@/lib/mock-batches";
+import { FloatingShapes } from "@/components/floating-shapes";
 
 const TITLE = "Verify a drug batch — VeriRx";
 const DESCRIPTION =
@@ -38,7 +39,9 @@ function VerifyPage() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="relative overflow-hidden px-6 py-16">
+        <FloatingShapes className="opacity-60" />
+        <div className="relative z-10 mx-auto max-w-3xl">
         <h1 className="text-4xl font-bold">Verify a product</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Enter the batch ID printed on the pack, or scan its QR code. No wallet or account
@@ -97,6 +100,7 @@ function VerifyPage() {
         )}
 
         {result && !loading && <ResultCard result={result} />}
+        </div>
       </main>
       <SiteFooter />
     </div>
