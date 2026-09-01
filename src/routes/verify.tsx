@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MOCK_BATCHES, verifyBatch, type VerifyResult } from "@/lib/mock-batches";
+import { FloatingShapes } from "@/components/floating-shapes";
 
 const TITLE = "Verify a drug batch — VeriRx";
 const DESCRIPTION =
