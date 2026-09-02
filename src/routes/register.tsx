@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MOCK_WALLET_ADDRESS } from "@/lib/mock-batches";
 import { btnGhost, btnOutline, btnSizes, btnSolid } from "@/lib/button-styles";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 
 const TITLE = "Register a drug batch — VeriRx";
 const DESCRIPTION =
@@ -39,7 +41,8 @@ const inputClass =
   "mt-2 w-full rounded-xl border border-input bg-surface-2/60 px-4 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent/70";
 
 function RegisterPage() {
-  const [connected, setConnected] = useState(false);
+  const { publicKey, connected, disconnect } = useWallet();
+  const { setVisible } = useWalletModal();
   const [form, setForm] = useState<FormState>(EMPTY);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
@@ -65,19 +68,13 @@ function RegisterPage() {
               Manufacturer flow. Records are written to Solana and cannot be edited.
             </p>
           </div>
-          {connected ? (
-            <button
-              onClick={() => setConnected(false)}
-              className={`${btnOutline} ${btnSizes.sm}`}
-            >
+          {connected && publicKey ? (
+            <button onClick={() => disconnect()} className={`${btnOutline} ${btnSizes.sm}`}>
               <span className="h-2 w-2 rounded-full bg-accent" />
-              {MOCK_WALLET_ADDRESS}
+              {publicKey.toBase58().slice(0, 4)}...{publicKey.toBase58().slice(-4)}
             </button>
           ) : (
-            <button
-              onClick={() => setConnected(true)}
-              className={`${btnSolid} ${btnSizes.sm}`}
-            >
+            <button onClick={() => setVisible(true)} className={`${btnSolid} ${btnSizes.sm}`}>
               Connect Wallet
             </button>
           )}
@@ -195,10 +192,7 @@ function SuccessCard({
       <p className="mt-6 text-sm text-muted-foreground">
         Print this code on the pack. Anyone can scan it to verify authenticity.
       </p>
-      <button
-        onClick={onReset}
-        className={`mt-8 ${btnGhost} ${btnSizes.md}`}
-      >
+      <button onClick={onReset} className={`mt-8 ${btnGhost} ${btnSizes.md}`}>
         Register another batch
       </button>
     </div>
