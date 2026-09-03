@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SolanaWalletProvider } from "../lib/solana-wallet-provider";
 
 function NotFoundComponent() {
   return (
@@ -124,9 +123,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SolanaWalletProvider>
-        <Outlet />
-      </SolanaWalletProvider>
+      <Outlet />
     </QueryClientProvider>
   );
 }
