@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { MOCK_BATCHES, verifyBatch, type VerifyResult } from "@/lib/mock-batches";
+import { verifyBatch, type VerifyResult } from "@/lib/batch-index";
 import { FloatingShapes } from "@/components/floating-shapes";
 import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
@@ -43,64 +43,50 @@ function VerifyPage() {
       <main className="relative overflow-hidden px-6 py-16">
         <FloatingShapes />
         <div className="relative z-10 mx-auto max-w-3xl">
-        <h1 className="text-4xl font-bold">Verify a product</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Enter the batch ID printed on the pack, or scan its QR code. No wallet or account
-          required.
-        </p>
+          <h1 className="text-4xl font-bold">Verify a product</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Enter the batch ID printed on the pack, or scan its QR code. No wallet or account
+            required.
+          </p>
 
-        <form
-          onSubmit={onSubmit}
-          className="mt-8 flex flex-col gap-3 rounded-3xl border border-border bg-surface/60 p-4 sm:flex-row"
-        >
-          <input
-            value={batchId}
-            onChange={(e) => setBatchId(e.target.value)}
-            placeholder="e.g. VRX-2291-AX"
-            className="flex-1 rounded-xl bg-surface-2/60 px-5 py-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:ring-1 focus:ring-accent/60"
-          />
-          <button
-            type="button"
-            title="QR scanning coming soon"
-            className={`${btnGhost} ${btnSizes.lg}`}
+          <form
+            onSubmit={onSubmit}
+            className="mt-8 flex flex-col gap-3 rounded-3xl border border-border bg-surface/60 p-4 sm:flex-row"
           >
-            Scan QR
-          </button>
-          <button
-            type="submit"
-            disabled={loading}
-            className={`${btnSolid} ${btnSizes.lg}`}
-          >
-            {loading && (
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground" />
-            )}
-            {loading ? "Checking chain…" : "Verify"}
-          </button>
-        </form>
-
-        <p className="mt-3 text-xs text-muted-foreground">
-          Demo IDs:{" "}
-          {MOCK_BATCHES.map((b) => (
+            <input
+              value={batchId}
+              onChange={(e) => setBatchId(e.target.value)}
+              placeholder="e.g. VRX-2291-AX"
+              className="flex-1 rounded-xl bg-surface-2/60 px-5 py-4 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:ring-1 focus:ring-accent/60"
+            />
             <button
-              key={b.batchId}
-              onClick={() => setBatchId(b.batchId)}
-              className="mr-2 underline underline-offset-4 transition-colors hover:text-accent"
+              type="button"
+              title="QR scanning coming soon"
+              className={`${btnGhost} ${btnSizes.lg}`}
             >
-              {b.batchId}
+              Scan QR
             </button>
-          ))}
-          or try anything else for a not-found result.
-        </p>
+            <button type="submit" disabled={loading} className={`${btnSolid} ${btnSizes.lg}`}>
+              {loading && (
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground" />
+              )}
+              {loading ? "Checking chain…" : "Verify"}
+            </button>
+          </form>
 
-        {loading && (
-          <div className="mt-8 animate-pulse rounded-3xl border border-border bg-surface/60 p-8">
-            <div className="h-4 w-40 rounded bg-surface-2" />
-            <div className="mt-4 h-8 w-64 rounded bg-surface-2" />
-            <div className="mt-6 h-20 rounded bg-surface-2" />
-          </div>
-        )}
+          <p className="mt-3 text-xs text-muted-foreground">
+            Enter a batch ID that's been registered, or try anything else to see a not-found result.
+          </p>
 
-        {result && !loading && <ResultCard result={result} />}
+          {loading && (
+            <div className="mt-8 animate-pulse rounded-3xl border border-border bg-surface/60 p-8">
+              <div className="h-4 w-40 rounded bg-surface-2" />
+              <div className="mt-4 h-8 w-64 rounded bg-surface-2" />
+              <div className="mt-6 h-20 rounded bg-surface-2" />
+            </div>
+          )}
+
+          {result && !loading && <ResultCard result={result} />}
         </div>
       </main>
       <SiteFooter />
@@ -113,8 +99,8 @@ function ResultCard({ result }: { result: VerifyResult }) {
     return (
       <Shell tone="destructive" icon="✕" title="No matching record" subtitle={result.batchId}>
         <p className="text-sm text-muted-foreground">
-          This batch ID is not registered on-chain. Do not dispense or consume — report it to
-          your regulator.
+          This batch ID is not registered on-chain. Do not dispense or consume — report it to your
+          regulator.
         </p>
       </Shell>
     );

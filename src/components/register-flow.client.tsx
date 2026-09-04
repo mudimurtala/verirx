@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { SolanaWalletProvider } from "@/lib/solana-wallet-provider";
+import { buildMemoTransaction, explorerTxUrl, type BatchRecord } from "@/lib/solana-memo";
 import { btnGhost, btnOutline, btnSizes, btnSolid } from "@/lib/button-styles";
+import { saveBatchIndex } from "@/lib/batch-index";
 
 type FormState = {
   drugName: string;
@@ -30,19 +32,67 @@ export default function RegisterFlow() {
 }
 
 function RegisterFlowInner() {
-  const { publicKey, connected, disconnect } = useWallet();
+  const { connection } = useConnection();
+  const { publicKey, connected, disconnect, sendTransaction } = useWallet();
   const { setVisible } = useWalletModal();
   const [form, setForm] = useState<FormState>(EMPTY);
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [signature, setSignature] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [indexWarning, setIndexWarning] = useState<string | null>(null);
 
   const set = (key: keyof FormState) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!connected) return;
+    if (!connected || !publicKey) return;
+
     setStatus("submitting");
-    setTimeout(() => setStatus("success"), 1600);
+    setError(null);
+
+    try {
+      const record: BatchRecord = {
+        batchId: form.batchId,
+        drugName: form.drugName,
+        manufacturer: publicKey.toBase58(),
+        manufactureDate: form.manufactureDate,
+        expiryDate: form.expiryDate,
+        registeredAt: new Date().toISOString(),
+      };
+
+      const transaction = buildMemoTransaction(record, publicKey);
+      const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+      transaction.recentBlockhash = blockhash;
+
+      const sig = await sendTransaction(transaction, connection);
+      await connection.confirmTransaction(
+        { signature: sig, blockhash, lastValidBlockHeight },
+        "confirmed",
+      );
+
+      setSignature(sig);
+      setIndexWarning(null);
+
+      try {
+        await saveBatchIndex(record, sig);
+      } catch (indexErr) {
+        console.error("Failed to save batch index:", indexErr);
+        setIndexWarning(
+          "Recorded on-chain, but the searchable index couldn't be saved. It's still verifiable via the Explorer link below.",
+        );
+      }
+
+      setStatus("success");
+    } catch (err) {
+      console.error("Batch registration failed:", err);
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong while writing to the chain. Please try again.",
+      );
+      setStatus("idle");
+    }
   };
 
   return (
@@ -60,13 +110,17 @@ function RegisterFlowInner() {
         )}
       </div>
 
-      {status === "success" ? (
+      {status === "success" && signature ? (
         <SuccessCard
           batchId={form.batchId || "VRX-0000-XX"}
           drugName={form.drugName}
+          signature={signature}
+          indexWarning={indexWarning}
           onReset={() => {
             setForm(EMPTY);
             setStatus("idle");
+            setSignature(null);
+            setIndexWarning(null);
           }}
         />
       ) : (
@@ -77,6 +131,11 @@ function RegisterFlowInner() {
           {!connected && (
             <p className="mb-6 rounded-xl border border-border bg-surface-2/60 px-4 py-3 text-sm text-muted-foreground">
               Connect a wallet to enable batch registration.
+            </p>
+          )}
+          {error && (
+            <p className="mb-6 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              {error}
             </p>
           )}
           <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
@@ -141,10 +200,14 @@ function RegisterFlowInner() {
 function SuccessCard({
   batchId,
   drugName,
+  signature,
+  indexWarning,
   onReset,
 }: {
   batchId: string;
   drugName: string;
+  signature: string;
+  indexWarning?: string | null;
   onReset: () => void;
 }) {
   const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&bgcolor=10-15-14&color=255-255-255&data=${encodeURIComponent(
@@ -153,7 +216,7 @@ function SuccessCard({
   return (
     <div className="mt-10 animate-[rise_0.6s_ease-out_both] rounded-3xl border border-accent/40 bg-surface/60 p-8 text-center">
       <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-accent uppercase">
-        Batch recorded
+        Batch recorded on-chain
       </span>
       <h2 className="mt-5 text-3xl font-bold">{batchId}</h2>
       {drugName && <p className="mt-1 text-sm text-muted-foreground">{drugName}</p>}
@@ -170,6 +233,19 @@ function SuccessCard({
       <p className="mt-6 text-sm text-muted-foreground">
         Print this code on the pack. Anyone can scan it to verify authenticity.
       </p>
+      {indexWarning && (
+        <p className="mt-4 rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 text-xs text-warning">
+          {indexWarning}
+        </p>
+      )}
+      <a
+        href={explorerTxUrl(signature)}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-4 block text-xs text-accent underline underline-offset-4"
+      >
+        View transaction on Solana Explorer
+      </a>
       <button onClick={onReset} className={`mt-8 ${btnGhost} ${btnSizes.md}`}>
         Register another batch
       </button>

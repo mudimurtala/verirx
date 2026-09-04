@@ -9,7 +9,7 @@ import { Typewriter } from "@/components/typewriter";
 import { btnGhost, btnSizes, btnSolid } from "@/lib/button-styles";
 
 
-const TITLE = "VeriRx — Verify drug batch authenticity on Solana";
+const TITLE = "VeriRx verify drug batch authenticity on Solana";
 const DESCRIPTION =
   "VeriRx lets manufacturers register drug batches on-chain and lets anyone verify a batch ID in seconds — stopping counterfeit medicine at the shelf.";
 
