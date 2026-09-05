@@ -74,10 +74,6 @@ function VerifyPage() {
             </button>
           </form>
 
-          <p className="mt-3 text-xs text-muted-foreground">
-            Enter a batch ID that's been registered, or try anything else to see a not-found result.
-          </p>
-
           {loading && (
             <div className="mt-8 animate-pulse rounded-3xl border border-border bg-surface/60 p-8">
               <div className="h-4 w-40 rounded bg-surface-2" />
@@ -171,9 +167,9 @@ function Shell({
 
 function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div>
+    <div className="min-w-0">
       <dt className="text-xs tracking-wide text-muted-foreground uppercase">{label}</dt>
-      <dd className="mt-1 text-sm font-medium text-foreground">{value}</dd>
+      <dd className="mt-1 text-sm font-medium break-all text-foreground">{value}</dd>
     </div>
   );
 }
