@@ -2,6 +2,8 @@
 
 Verify drug batch authenticity, secured on Solana.
 
+https://github.com/user-attachments/assets/f773a03c-e6a0-4aaf-8601-73afa3a3be8e
+
 ## The story behind this
 
 What does a microbiology graduate have to do with writing code? Most people would not find an easy answer. Neither did I, for a long time.
@@ -34,7 +36,7 @@ That is how VeriRx came to be. Two unrelated parts of my life, health and a life
 ## Live demo
 
 - Live site: https://verirx.netlify.app
-- Demo video: coming soon
+- Demo video: see above
 - Solana Memo program used: [MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr](https://explorer.solana.com/address/MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr?cluster=devnet)
 
 ## Tech stack
